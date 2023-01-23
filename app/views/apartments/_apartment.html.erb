@@ -1,27 +1,14 @@
 <div id="<%= dom_id apartment %>">
-  <p>
-    <strong>Badroom:</strong>
-    <%= apartment.badroom %>
-  </p>
-
-  <p>
-    <strong>Apt type:</strong>
-    <%= apartment.apt_type %>
-  </p>
-
-  <p>
-    <strong>Condition:</strong>
-    <%= apartment.condition %>
-  </p>
-
-  <p>
-    <strong>Price:</strong>
-    <%= apartment.price %>
-  </p>
-
-  <p>
-    <strong>Location:</strong>
-    <%= apartment.location %>
-  </p>
-
+  <div class="card bg-light border rounded-3">
+    <ul class="list-group list-group-flush ">
+    <li class="list-group-item"> if apartment.pictures.attached? >< link_to (image_tag apartment.pictures.first, size: "260x120", class:"rounded"), apartment>< end ></li>  
+    <li class="list-group-item bg-light"><%= image_tag "ico/price.png", size: "25x25"%><%= apartment.price%></li>
+    <li class="list-group-item bg-light"><%= image_tag "ico/bed.png", size: "25x25"%><%= apartment.badroom%></li>
+    <li class="list-group-item bg-light"><%= image_tag "ico/newtype.png", size: "25x25"%><%= apartment.apt_type%></li>
+    <li class="list-group-item bg-light"><%= image_tag "ico/repair.png", size: "25x25"%><%= apartment.condition %></li>
+    <li class="list-group-item bg-light"><%= image_tag "ico/location.png", size: "25x25"%><%= apartment.location %></li>
+    <li class="list-group-item bg-light"><%= image_tag "ico/phone.png", size: "25x25"%></li>
+    <%= link_to "Show this apartment", apartment, class:"list-group-item list-group-item-action" %>
+    </ul>
+  </div>
 </div>

@@ -1,8 +1,65 @@
-<%= render @apartment %>
+<br/>
+<div class="row">
+
+
+  <div class="col">
+    <table class="table">
+      <tr>
+        <td><%= image_tag "ico/price.png", size: "25x25"%><%= @apartment.price %></td>
+        <td><%= image_tag "ico/bed.png", size: "25x25"%><%= @apartment.badroom %></td>
+      </tr>
+
+      <tr>
+        <td><%= image_tag "ico/repair.png", size: "25x25"%><%= @apartment.condition %></td>
+        <td><%= image_tag "ico/location.png", size: "25x25"%><%= @apartment.location %></td>
+      </tr>
+
+      <tr>    
+        <td><%= image_tag "ico/newtype.png", size: "25x25"%><%= @apartment.apt_type %></td>
+        <td><%#= image_tag "ico/phone.png", size: "25x25"%><%#= @apartment.user.phone %></td>     
+      </tr>
+    </table>
+
+      <p><%#= @apartment.user.fullname %><p/>
+
+      <%# if @apartment.user.avatar.attached? %>
+        <%#= link_to (image_tag @apartment.user.avatar, size: "250x300" ), @apartment.user%>
+      <%# end %> 
+
+      <p><%#= image_tag "ico/phone.png", size: "25x25"%><%#= @apartment.user.phone %>
+        <%#= image_tag "ico/mail.png", size: "25x25"%><%#=  @apartment.user.email%> <p/>
+      
+      <%#= link_to "Show all my offers", @apartment.user, class:"text-reset"%>
+  </div> 
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <div>
-  <%= link_to "Edit this apartment", edit_apartment_path(@apartment) %> |
-  <%= link_to "Back to apartments", apartments_path %>
+  <%= link_to "Edit this apartment", edit_apartment_path(@apartment), class:"btn btn-outline-secondary col-2 my-1" %> 
 
-  <%= button_to "Destroy this apartment", @apartment, method: :delete %>
+  <%= button_to "Delete this apartment", @apartment, method: :delete, class:"btn btn-outline-secondary col-2 my-1" %>
+  <%= link_to "Back to apartments", apartments_path, class:"btn btn-outline-secondary col-2 my-1" %>
 </div>

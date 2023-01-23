@@ -1,33 +1,38 @@
 <%= form_with(model: apartment) do |form| %>
   
-
-
-  <div>
+  <div class="col-md-4">
     <%= form.label :badroom, style: "display: block" %>
-    <%= form.number_field :badroom %>
+    <%= form.select  :badroom, [["Select badrooms", ""], [1],[2],[3], [4],  ['5 or more']], {}, class:"form-select" %>
   </div>
 
-  <div>
+  <div class="col-md-4">
     <%= form.label :apt_type, style: "display: block" %>
-    <%= form.text_field :apt_type %>
+    <%= form.select  :apt_type, [["Select Type", ""], ['Secondary'], ['New consctruction']], {}, class:"form-select" %>
   </div>
 
-  <div>
+  <div class="col-md-4">
     <%= form.label :condition, style: "display: block" %>
-    <%= form.text_field :condition %>
+    <%= form.select  :condition, [["Select condition", ""], ['White version'], ['Living'], ['Repaired']], {}, class:"form-select" %>
   </div>
 
-  <div>
-    <%= form.label :price, style: "display: block" %>
-    <%= form.number_field :price %>
+  <div class="col-md-4">
+      <%= form.label :price, style: "display: block" %>
+      <%= form.text_field :price, class:"form-control"  %>
   </div>
 
-  <div>
-    <%= form.label :location, style: "display: block" %>
-    <%= form.text_field :location %>
+  <div class="col-md-4">
+      <%= form.label :location, style: "display: block" %>
+      <%= form.select  :location, [["Select Location", ""], ['Las Vegas'], ['Bora Bora'], ['Miami'], ['Florida']], {}, class:"form-select"%>
+  </div>
+  
+  <div class="col-md-4">
+    <%#= form.label :pictures, class: "form-label" %>
+    <%#= form.file_field :pictures, multiple: true, class:"form-control"%> 
   </div>
 
-  <div>
-    <%= form.submit %>
+
+
+  <div>  <br/>
+    <%= form.submit class:"btn btn-outline-success btn-lg col-4" %>
   </div>
 <% end %>
