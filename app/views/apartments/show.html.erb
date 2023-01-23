@@ -1,7 +1,10 @@
 <br/>
 <div class="row">
 
-
+Pic:
+<% @apartment.pictures.each do |picture| %>
+<%= image_tag picture %>
+<% end %>   
   <div class="col">
     <table class="table">
       <tr>
