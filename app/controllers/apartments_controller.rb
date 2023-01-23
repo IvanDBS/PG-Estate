@@ -12,7 +12,8 @@ class ApartmentsController < ApplicationController
 
   # GET /apartments/new
   def new
-    @apartment = Apartment.new
+    #@apartment = Apartment.new
+    @apartment = current_user.apartments.build
   end
 
   # GET /apartments/1/edit
@@ -21,7 +22,8 @@ class ApartmentsController < ApplicationController
 
   # POST /apartments or /apartments.json
   def create
-    @apartment = Apartment.new(apartment_params)
+    #@apartment = Apartment.new(apartment_params)
+    @apartment = current_user.apartments.build(apartment_params)
 
     respond_to do |format|
       if @apartment.save
@@ -65,6 +67,6 @@ class ApartmentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def apartment_params
-      params.require(:apartment).permit(:badroom, :apt_type, :condition, :price, :location, pictures: [])
+      params.require(:apartment).permit(:badroom, :apt_type, :condition, :price, :user_id, :location, pictures: [])
     end
 end
