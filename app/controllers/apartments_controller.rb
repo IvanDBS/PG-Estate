@@ -1,9 +1,12 @@
 class ApartmentsController < ApplicationController
+
   before_action :set_apartment, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: %i[ index show ]
+  before_action :correct_user, only: %i[ edit update destroy ]
 
   # GET /apartments or /apartments.json
   def index
-    @apartments = Apartment.all
+    @pagy, @apartments = pagy(Apartment.all.order(created_at: :desc))
   end
 
   # GET /apartments/1 or /apartments/1.json
@@ -58,6 +61,11 @@ class ApartmentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def correct_user
+    @apartment = current_user.apartments.find_by(id: params[:id]) 
+    redirect_to apartment_path, notice: "WTF #{@current_user.fullname}? You are not authorized to do this!" if @apartment.nil?
+  end 
 
   private
     # Use callbacks to share common setup or constraints between actions.
