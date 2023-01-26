@@ -1,0 +1,37 @@
+<h1> <%= @user.fullname %> </h1>
+
+<div class="row">
+
+  <div class="col-3">
+    <%#= image_tag @user.avatar, size: "250x300" %>
+  </div>
+
+  <div class="col-3">
+    <table class="table">
+      <tr>
+        <th scope="col" colspan="2">Feel free to contact me:</th>
+      </tr>
+
+      <tr>
+        <td><%= image_tag "ico/phone.png", size: "25x25"%></td>
+        <td><%= @user.phone %></td>
+      </tr>
+
+      <tr>
+        <td><%= image_tag "ico/mail.png", size: "25x25"%></td>
+        <td><%= @user.email %></td>
+      </tr>
+    </table>
+  </div>
+
+</div>
+
+<br/> 
+<h3>My offers:</h3>
+  <hr/>
+  <div id="apartments", class="row row-cols-1 row-cols-md-4 g-5 ">
+    <% @user.apartments.each do |apartment| %>
+      <%= render apartment %>
+    <% end %>
+  </div>
+  <br/>

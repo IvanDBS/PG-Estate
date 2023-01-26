@@ -5,20 +5,18 @@
 
     <div id="carouselExample" class="carousel slide">
 
-      <div class="carousel-inner">
-    
+      <div class="carousel-inner">    
         <div class="carousel-item active"><% if @apartment.pictures.attached? %>
-        <%= image_tag @apartment.pictures.first, class:"d-block w-100" %> <% end %>
+          <%= image_tag @apartment.pictures.first, class:"d-block w-100" %> <% end %>
         </div>
 
         <div class="carousel-item"><% if @apartment.pictures.second %>
-        <%= image_tag @apartment.pictures.second, size: "300*300", class:"d-block w-100" %> <% end %>
+          <%= image_tag @apartment.pictures.second, size: "300*300", class:"d-block w-100" %> <% end %>
         </div>
 
         <div class="carousel-item"><% if @apartment.pictures.third %>
-        <%= image_tag @apartment.pictures.third, size: "300*300", class:"d-block w-100"  %> <% end %>
+          <%= image_tag @apartment.pictures.third, size: "300*300", class:"d-block w-100"  %> <% end %>
         </div>
-
       </div>
 
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -57,9 +55,8 @@
       <%# end %> 
 
       <p><%= image_tag "ico/phone.png", size: "25x25"%><%= @apartment.user.phone %>
-        <%= image_tag "ico/mail.png", size: "25x25"%><%=  @apartment.user.email%> <p/>
-      
-      <%#= link_to "Show all my offers", @apartment.user, class:"text-reset"%>
+      <%= image_tag "ico/mail.png", size: "25x25"%><%=  @apartment.user.email%> <p/>
+      <%= link_to "Show all my offers", @apartment.user, class:"text-reset"%>
   </div> 
 </div>
 

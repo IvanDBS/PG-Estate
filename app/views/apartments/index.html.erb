@@ -1,11 +1,5 @@
 <h1>Apartments</h1>
 
-<% if user_signed_in? %> 
-  <%= link_to "New apartment", new_apartment_path, class:"btn btn-outline-success btn-lg col-2" %>
-<br/>
-<% end %>
-<br/> 
-
 <div id="apartments", class="row row-cols-1 row-cols-md-4 g-5 ">
   <% @apartments.each do |apartment| %>
     <%= render apartment %>
