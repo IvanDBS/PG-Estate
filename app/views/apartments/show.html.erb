@@ -50,11 +50,11 @@
 
       <p><%= @apartment.user.fullname %><p/>
 
-      <%# if @apartment.user.avatar.attached? %>
-        <%#= link_to (image_tag @apartment.user.avatar, size: "250x300" ), @apartment.user%>
-      <%# end %> 
+      <% if @apartment.user.avatar.attached? %>
+        <%= link_to (image_tag @apartment.user.avatar, size: "250x300" ), @apartment.user%>
+      <% end %> 
 
-      <p><%= image_tag "ico/phone.png", size: "25x25"%><%= @apartment.user.phone %>
+      <p><%= link_to (image_tag "ico/phone.png", size: "25x25"), "tel:#{@apartment.user.phone}" %> <%= @apartment.user.phone %>
       <%= image_tag "ico/mail.png", size: "25x25"%><%=  @apartment.user.email%> <p/>
       <%= link_to "Show all my offers", @apartment.user, class:"text-reset"%>
   </div> 

@@ -2,8 +2,8 @@
 
 <div class="row">
 
-  <div class="col-3">
-    <%#= image_tag @user.avatar, size: "250x300" %>
+  <div class="col-4">
+    <%= image_tag @user.avatar if @user.avatar.attached?%>
   </div>
 
   <div class="col-3">
@@ -13,14 +13,25 @@
       </tr>
 
       <tr>
-        <td><%= image_tag "ico/phone.png", size: "25x25"%></td>
-        <td><%= @user.phone %></td>
+        <td><%= link_to (image_tag "ico/phone.png", size: "25x25"), "tel:#{@user.phone}" %></td>
+        <td><%=  @user.phone %></td>
       </tr>
 
       <tr>
         <td><%= image_tag "ico/mail.png", size: "25x25"%></td>
         <td><%= @user.email %></td>
       </tr>
+
+      <tr>
+        <td>With PG </td>
+        <td>since <%= @user.created_at.strftime("%b %Y")%> </td>
+      </tr>
+
+      <tr>
+        <td>Offers: </td>
+        <td><%= @user.apartments.count %> </td>
+      </tr>
+
     </table>
   </div>
 
