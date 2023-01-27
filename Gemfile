@@ -27,6 +27,8 @@ gem "puma", "~> 5.0"
 
 gem "rails", "~> 7.0.4", ">= 7.0.4.1"
 
+gem 'ransack'
+
 gem "sprockets-rails"
 
 gem "stimulus-rails"

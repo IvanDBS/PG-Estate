@@ -6,7 +6,9 @@ class ApartmentsController < ApplicationController
 
   # GET /apartments or /apartments.json
   def index
-    @pagy, @apartments = pagy(Apartment.all.order(created_at: :desc))
+
+    @q = Apartment.ransack(params[:q]) 
+    @pagy, @apartments = pagy(@q.result.all.order(created_at: :desc))
   end
 
   # GET /apartments/1 or /apartments/1.json

@@ -1,0 +1,8 @@
+<%= search_form_for @q do |f| %>
+
+  <%= f.label :apt_type_eq %>
+  <%= f.search_field :apt_type_eq %>
+  <%= f.input :apt_type_eq, collection: ['Secondary']  %>
+
+  <%= f.submit %>
+<% end %>  
