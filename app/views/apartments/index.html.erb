@@ -1,32 +1,6 @@
 <h1>Apartments</h1>
 
-<form class="row g-4">
-<%= search_form_for @q do |f| %>
-
-<div class="col-md-2">
-
-  <%= f.select  :apt_type_cont, [["Select Type", ""], ['Secondary'], ['New consctruction']], {}, class:"form-select"%> </div>
-  <div class="col-md-2"><%= f.select  :condition_cont, [["Select condition", ""], ['White version'], ['Living'], ['Repaired']], {}, class:"form-select" %> </div>
-  <div class="col-md-2"><%= f.select  :location_cont, [["Select Location", ""], ['Las Vegas'], ['Bora Bora'], ['Miami'], ['Florida']], {}, class:"form-select col-md-4"%> </div>
-  <div class="col-md-2"><%= f.select  :badroom_cont, [["Select badrooms", ""], [1],[2],[3], [4],  ['5 or more']], {}, class:"form-select" %></div>
-
-
-<div class="col-md-2">
-
-<%= range_field_tag(:sliderRangeRails) %>
-</div>
-
-
-    <div class="col-md-2"><%= f.submit class:"btn btn-outline-success" %></div>
-
-
-
-
-<% end %>
-
-</form><br/>
-
-<%#= render search_form_for %>
+  <%= render 'apartments/search_form' %>
 
 <div id="apartments", class="row row-cols-1 row-cols-md-4 g-5 ">
   <% @apartments.each do |apartment| %>
