@@ -54,39 +54,22 @@
         <%= link_to (image_tag @apartment.user.avatar, size: "250x300" ), @apartment.user%>
       <% end %> 
 
-      <p><%= link_to (image_tag "ico/phone.png", size: "20x20"), "tel:#{@apartment.user.phone}" %> <%= @apartment.user.phone %>
-      <%= image_tag "ico/mail.png", size: "20x20"%><%=  @apartment.user.email%> <p/>
+      <p>
+        <%= link_to (image_tag "ico/phone.png", size: "20x20"), "tel:#{@apartment.user.phone}" %> <%= @apartment.user.phone %>
+        <%= image_tag "ico/mail.png", size: "20x20"%><%=  @apartment.user.email%> 
+      <p/>
+
       <%= link_to "Show all my offers", @apartment.user, class:"text-reset"%>
   </div> 
 </div>
 
+  <div class="col-md-3 mb-2">
+   <%= link_to "Edit this apartment", edit_apartment_path(@apartment), class:"btn btn-outline-secondary col-7" %> 
+  </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div>
-  <%= link_to "Edit this apartment", edit_apartment_path(@apartment), class:"btn btn-outline-secondary col-2 my-1" %> 
-
-  <%= button_to "Delete this apartment", @apartment, method: :delete, class:"btn btn-outline-secondary col-2 my-1" %>
-  <%= link_to "Back to apartments", apartments_path, class:"btn btn-outline-secondary col-2 my-1" %>
-</div>
+  <div class="col-md-3 mb-2">
+    <%= button_to "Delete this apartment", @apartment, method: :delete, data: {turbo_confirm: "This appartment will be deleted! Are you sure?"},  class:"btn btn-outline-secondary col-7" %>
+  </div>
+  <div class="col-md-3 mb-2">
+    <%= link_to "Back to apartments", apartments_path, class:"btn btn-outline-secondary col-7" %>
+  </div>
