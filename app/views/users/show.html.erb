@@ -3,7 +3,7 @@
 <div class="row">
 
   <div class="col-4">
-    <%= image_tag @user.avatar if @user.avatar.attached?%>
+    <%= image_tag @user.avatar, size: "250x300" if @user.avatar.attached?%>
   </div>
 
   <div class="col-3">

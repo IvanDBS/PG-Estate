@@ -10,10 +10,9 @@
     <%= render "devise/shared/error_messages", resource: resource %>
 
     <div class="col-md-4">
-      <%= image_tag(resource.avatar) if resource.avatar.attached? %>   
+      <%= image_tag(resource.avatar, size: "250x300") if resource.avatar.attached? %>   
       <%= f.file_field :avatar, class:"form-control"%>
     </div>
-
 
     <div class="col-md-4">
       <%= f.label :email %><br />
