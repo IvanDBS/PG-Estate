@@ -11,7 +11,6 @@ SecureHeaders::Configuration.default do |config|
   policy = {
     default_src: %w('none'),
     base_uri: %w('self'),
-    block_all_mixed_content: true,
     child_src: %w('self'),
     connect_src: %w('self' ws: wss:),
     font_src: %w('self' https: data:),
@@ -25,8 +24,7 @@ SecureHeaders::Configuration.default do |config|
     script_src: %w('self' 'unsafe-inline' 'unsafe-eval' https:),
     style_src: %w('self' 'unsafe-inline' https:),
     worker_src: %w('self'),
-    upgrade_insecure_requests: true,
-    report_uri: %w(/csp_violation_report_endpoint)
+    upgrade_insecure_requests: true
   }
 
   config.csp = policy.merge(
