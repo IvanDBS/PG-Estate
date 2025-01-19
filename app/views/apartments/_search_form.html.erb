@@ -1,0 +1,105 @@
+<div class="search-form-compact mb-4" 
+     data-controller="search"
+     data-search-url-value="<%= apartments_path %>"
+     data-search-debounce-value="300">
+  
+  <button class="btn btn-primary expand-search" data-action="click->search#toggleForm">
+    <i class="bi bi-search"></i> Find Your Dream Home
+  </button>
+
+  <div class="search-form-expanded" data-search-target="expandedForm">
+    <%= search_form_for @q,
+        html: {
+          class: "row g-3",
+          data: { 
+            search_target: "form",
+            action: "input->search#inputChanged submit->search#submit"
+          }
+        } do |f| %>
+      
+      <div class="col-md-4">
+        <div class="form-floating">
+          <%= f.select :apt_type_eq,
+              Apartment.apt_types.keys.map { |t| [t.titleize, t] },
+              { include_blank: "Any Type" },
+              class: "form-select",
+              "aria-label": "Apartment type" %>
+          <label>Type</label>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-floating">
+          <%= f.select :condition_eq,
+              Apartment.conditions.keys.map { |c| [c.titleize, c] },
+              { include_blank: "Any Condition" },
+              class: "form-select",
+              "aria-label": "Apartment condition" %>
+          <label>Condition</label>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-floating">
+          <%= f.select :bedroom_eq,
+              (1..5).map { |n| [pluralize(n, "bedroom"), n] },
+              { include_blank: "Any Bedrooms" },
+              class: "form-select",
+              "aria-label": "Number of bedrooms" %>
+          <label>Bedrooms</label>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-floating">
+          <%= f.text_field :location_cont,
+              class: "form-control",
+              placeholder: "Enter location",
+              "aria-label": "Location search" %>
+          <label>Location</label>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-floating">
+          <%= f.number_field :price_lteq,
+              class: "form-control",
+              placeholder: "Maximum price",
+              min: 0,
+              step: 100,
+              "aria-label": "Maximum price" %>
+          <label>Max Price</label>
+        </div>
+      </div>
+
+      <div class="col-12 d-flex justify-content-end gap-2">
+        <%= link_to apartments_path,
+            class: "btn btn-outline-secondary",
+            data: { action: "search#reset" },
+            aria: { label: "Clear search" } do %>
+          <i class="bi bi-x-lg me-1"></i> Clear
+        <% end %>
+        
+        <%= button_tag type: 'submit',
+            class: "btn btn-primary",
+            aria: { label: "Search apartments" } do %>
+          <i class="bi bi-search me-1"></i> Search
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <%# Loading indicator %>
+  <div data-search-target="loading" class="text-center mt-4 d-none">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <%# Results container %>
+  <div data-search-target="results" class="mt-4">
+    <%= render partial: "apartments/list", locals: { apartments: @apartments } %>
+  </div>
+</div>
+
+<br/>

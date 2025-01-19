@@ -1,0 +1,333 @@
+@import "bootstrap";
+
+// Custom variables
+:root {
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --secondary-color: #64748b;
+  --success-color: #22c55e;
+  --danger-color: #ef4444;
+  --warning-color: #f59e0b;
+  --info-color: #3b82f6;
+  --light-color: #f8fafc;
+  --dark-color: #0f172a;
+  
+  --body-bg: #f1f5f9;
+  --card-bg: #ffffff;
+  --input-bg: #ffffff;
+  --border-color: #e2e8f0;
+  
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  
+  --transition-base: all 0.2s ease-in-out;
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --text-contrast: 4.5;
+}
+
+// Body styles
+body {
+  background-color: var(--body-bg);
+  font-family: 'Inter', sans-serif;
+}
+
+// Navbar styles
+.navbar {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-base);
+  
+  &.scrolled {
+    box-shadow: var(--shadow-md);
+  }
+  
+  .nav-link {
+    color: var(--secondary-color);
+    transition: var(--transition-base);
+    position: relative;
+    
+    &:hover {
+      color: var(--primary-color);
+    }
+    
+    &.active {
+      color: var(--primary-color);
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--primary-color);
+        transform: scaleX(1);
+        transition: var(--transition-smooth);
+      }
+    }
+    
+    &:not(.active)::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--primary-color);
+      transform: scaleX(0);
+      transition: var(--transition-smooth);
+    }
+    
+    &:hover::after {
+      transform: scaleX(1);
+    }
+  }
+}
+
+// Card styles
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  transition: var(--transition-smooth);
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .card-img-overlay {
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%);
+  }
+}
+
+// Button styles
+.btn {
+  transition: var(--transition-smooth);
+  
+  &:hover {
+    transform: translateY(-1px);
+  }
+  
+  &:active {
+    transform: translateY(1px);
+  }
+  
+  &.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    
+    &:hover {
+      background-color: var(--primary-hover);
+      border-color: var(--primary-hover);
+    }
+  }
+}
+
+// Form control styles
+.form-control {
+  background-color: var(--input-bg);
+  border: 1px solid var(--border-color);
+  transition: var(--transition-base);
+  
+  &:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
+  }
+}
+
+// Utility classes
+.hover-shadow-md {
+  transition: var(--transition-smooth);
+  
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.transition-shadow {
+  transition: box-shadow 0.3s ease;
+}
+
+// Image styles
+.img-hover-zoom {
+  overflow: hidden;
+  
+  img {
+    transition: var(--transition-smooth);
+    
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+// Badge styles
+.badge {
+  transition: var(--transition-base);
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+// Animation keyframes
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Animation classes
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+// Accessibility improvements
+.visually-hidden-focusable:not(:focus):not(:focus-within) {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+// Touch device improvements
+@media (hover: none) {
+  .card:hover {
+    transform: none;
+  }
+  
+  .btn:hover {
+    transform: none;
+  }
+  
+  .img-hover-zoom img:hover {
+    transform: none;
+  }
+}
+
+// Loading skeleton animation
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+  border-radius: 4px;
+}
+
+// Skeleton loading animation
+.skeleton-card {
+  background: linear-gradient(
+    90deg,
+    var(--body-bg) 0%,
+    var(--border-color) 50%,
+    var(--body-bg) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+// Search form styles
+.search-form-compact {
+  position: relative;
+  margin-bottom: 2rem;
+
+  .expand-search {
+    width: 100%;
+    text-align: left;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    transition: var(--transition-smooth);
+
+    &:hover {
+      background-color: var(--primary-hover);
+    }
+  }
+
+  .search-form-expanded {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--card-bg);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
+
+    &.show {
+      display: block;
+      animation: slideDown 0.3s ease-out;
+    }
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Price badge styles
+.price-badge {
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1;
+} 

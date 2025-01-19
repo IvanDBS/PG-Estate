@@ -1,0 +1,156 @@
+<div class="container mt-4">
+  <%= form_with(model: apartment, data: { turbo: false }, class: "needs-validation") do |form| %>
+    <% if apartment.errors.any? %>
+      <div class="alert alert-danger rounded-4 mb-4">
+        <div class="d-flex align-items-center mb-3">
+          <i class="bi bi-exclamation-circle-fill text-danger me-2"></i>
+          <h5 class="mb-0">Please fix the following errors:</h5>
+        </div>
+        <ul class="list-unstyled mb-0">
+          <% apartment.errors.each do |error| %>
+            <li class="d-flex align-items-center text-danger">
+              <i class="bi bi-dot me-2"></i>
+              <%= error.full_message %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="form-floating">
+          <%= form.select :bedroom, 
+              options_for_select([["Select bedrooms", ""], 1, 2, 3, 4, 5, 6], apartment.bedroom), 
+              {}, 
+              class: "form-select",
+              required: true %>
+          <%= form.label :bedroom, class: "required" %>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-floating">
+          <%= form.select :apt_type, 
+              Apartment.apt_types.keys.map { |type| [type.titleize, type] },
+              { prompt: "Select type" },
+              class: "form-select",
+              required: true %>
+          <%= form.label :apt_type, "Property Type", class: "required" %>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-floating">
+          <%= form.select :condition, 
+              Apartment.conditions.keys.map { |condition| [condition.humanize, condition] },
+              { prompt: "Select condition" },
+              class: "form-select",
+              required: true %>
+          <%= form.label :condition, class: "required" %>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-floating">
+          <%= form.number_field :price, 
+              class: "form-control", 
+              min: 1, 
+              required: true,
+              placeholder: "Enter price" %>
+          <%= form.label :price, class: "required" %>
+          <div class="form-text">Enter the price in USD</div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="form-floating">
+          <%= form.select :location,
+              options_for_select([
+                ["Select Location", ""],
+                "New York, NY",
+                "Los Angeles, CA",
+                "Chicago, IL",
+                "Houston, TX",
+                "Phoenix, AZ",
+                "Philadelphia, PA",
+                "San Antonio, TX",
+                "San Diego, CA",
+                "Dallas, TX",
+                "San Jose, CA"
+              ], apartment.location),
+              {},
+              class: "form-select",
+              required: true %>
+          <%= form.label :location, class: "required" %>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label mb-3">
+          <i class="bi bi-images me-2"></i>Property Photos
+          <span class="text-danger">*</span>
+        </label>
+        
+        <div class="upload-zone p-4 rounded-4 bg-light text-center mb-3">
+          <i class="bi bi-cloud-upload display-4 text-primary mb-3"></i>
+          <p class="mb-3">Drag and drop your photos here or click to browse</p>
+          <%= form.file_field :pictures, 
+              multiple: true, 
+              class: "form-control", 
+              accept: "image/png,image/jpeg,image/jpg",
+              direct_upload: true %>
+        </div>
+        <div class="form-text">
+          <ul class="list-unstyled mb-0">
+            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Accepted formats: PNG, JPG, JPEG</li>
+            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Maximum file size: 5MB per image</li>
+            <li><i class="bi bi-check-circle-fill text-success me-2"></i>You can upload up to 5 images</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="d-flex justify-content-between align-items-center">
+      <%= form.submit "Create Property", class: "btn btn-primary btn-lg px-4" %>
+      <%= link_to "Cancel", apartments_path, class: "btn btn-outline-secondary px-4" %>
+    </div>
+  <% end %>
+</div>
+
+<% content_for :styles do %>
+  <style>
+    .form-floating > label.required::after {
+      content: " *";
+      color: var(--bs-danger);
+    }
+    
+    .upload-zone {
+      border: 2px dashed var(--bs-primary);
+      transition: all 0.3s ease;
+    }
+    
+    .upload-zone:hover {
+      background-color: var(--bs-primary-bg-subtle) !important;
+      border-color: var(--bs-primary-border-subtle);
+    }
+    
+    .form-control:focus,
+    .form-select:focus {
+      border-color: var(--bs-primary);
+      box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
+    }
+    
+    .form-floating > .form-control::placeholder {
+      color: var(--bs-secondary-color);
+    }
+    
+    .form-floating > .form-control:not(:placeholder-shown) ~ label,
+    .form-floating > .form-select ~ label {
+      color: var(--bs-primary);
+      opacity: 0.65;
+    }
+  </style>
+<% end %>

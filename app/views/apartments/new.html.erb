@@ -1,0 +1,95 @@
+<% content_for :title, "Add New Property - PG Estate" %>
+
+<div class="new-property-page py-5">
+  <div class="container">
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to 'Home', root_path %></li>
+        <li class="breadcrumb-item"><%= link_to 'Properties', apartments_path %></li>
+        <li class="breadcrumb-item active">Add New Property</li>
+      </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card border-0 shadow-lg rounded-4">
+          <div class="card-header bg-white border-0 py-4">
+            <h1 class="h3 mb-0 fw-bold">Add New Property</h1>
+          </div>
+          <div class="card-body p-4">
+            <%= render "form", apartment: @apartment %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-lg rounded-4 mb-4">
+          <div class="card-body p-4">
+            <h5 class="card-title mb-4">Tips for Better Listings</h5>
+            <div class="tips-list">
+              <div class="tip-item d-flex align-items-start mb-3">
+                <div class="tip-icon bg-primary bg-opacity-10 rounded-circle p-2 me-3">
+                  <i class="bi bi-camera text-primary"></i>
+                </div>
+                <div>
+                  <h6 class="mb-1">Quality Photos</h6>
+                  <p class="text-muted small mb-0">Add clear, well-lit photos from different angles to showcase your property.</p>
+                </div>
+              </div>
+              
+              <div class="tip-item d-flex align-items-start mb-3">
+                <div class="tip-icon bg-primary bg-opacity-10 rounded-circle p-2 me-3">
+                  <i class="bi bi-geo-alt text-primary"></i>
+                </div>
+                <div>
+                  <h6 class="mb-1">Accurate Location</h6>
+                  <p class="text-muted small mb-0">Specify the exact location to help potential buyers/renters find your property.</p>
+                </div>
+              </div>
+              
+              <div class="tip-item d-flex align-items-start">
+                <div class="tip-icon bg-primary bg-opacity-10 rounded-circle p-2 me-3">
+                  <i class="bi bi-info-circle text-primary"></i>
+                </div>
+                <div>
+                  <h6 class="mb-1">Detailed Information</h6>
+                  <p class="text-muted small mb-0">Provide accurate details about bedrooms, condition, and price to attract serious inquiries.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center">
+          <%= link_to apartments_path, class: "text-decoration-none" do %>
+            <i class="bi bi-arrow-left me-2"></i>Back to Properties
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :styles do %>
+  <style>
+    .new-property-page {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+    
+    .tip-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .tip-item {
+      transition: transform 0.3s ease;
+    }
+    
+    .tip-item:hover {
+      transform: translateX(5px);
+    }
+  </style>
+<% end %>

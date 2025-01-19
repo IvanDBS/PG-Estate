@@ -1,0 +1,32 @@
+<form class="row g-4">
+  <%= search_form_for @q do |f| %>
+
+  <div class="col-md-2">
+    <%= f.select  :apt_type_cont, [["Select Type", ""], ['Secondary'], ['New consctruction']], {}, class:"form-select"%> 
+  </div>
+
+  <div class="col-md-2">
+    <%= f.select  :condition_cont, [["Select condition", ""], ['White version'], ['Living'], ['Repaired']], {}, class:"form-select" %> 
+  </div>
+
+  <div class="col-md-2"><%= f.select  :location_cont, [["Select Location", ""], ['Las Vegas'], ['Bora Bora'], ['Miami'], ['Florida']], {}, class:"form-select col-md-4"%> 
+  </div>
+
+  <div class="col-md-2">
+    <%= f.select  :badroom_cont, [["Select badrooms", ""], [1],[2],[3], [4],  ['5 or more']], {}, class:"form-select" %>
+  </div>
+
+
+  <div class="col-md-2">
+    <%= f.search_field :price_lteq, id: 'hidden', class:"form-control", placeholder:"Price till:" %> 
+  </div>
+
+  <div class="col-md-2">
+    <%= f.submit class:"btn btn-outline-success col-12" %>
+  </div>
+
+</form>
+
+<% end %>
+
+<br/>

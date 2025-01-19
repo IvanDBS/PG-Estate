@@ -1,0 +1,156 @@
+<% content_for :title, "#{@user.fullname} - Profile | PG Estate" %>
+
+<div class="profile-page py-5">
+  <div class="container">
+    <div class="row">
+      <!-- User Profile Sidebar -->
+      <div class="col-lg-4 mb-4">
+        <div class="card border-0 shadow-lg rounded-4 profile-card">
+          <div class="card-body text-center p-4">
+            <div class="avatar-wrapper mb-4 position-relative">
+              <% if @user.avatar.present? %>
+                <%= image_tag @user.avatar.url, 
+                    class: "rounded-circle img-thumbnail shadow-sm", 
+                    style: "width: 150px; height: 150px; object-fit: cover;" %>
+              <% else %>
+                <div class="avatar-placeholder rounded-circle">
+                  <span class="display-4 text-muted"><%= @user.fullname[0].upcase %></span>
+                </div>
+              <% end %>
+            </div>
+            
+            <h3 class="card-title h4 mb-3"><%= @user.fullname %></h3>
+            <div class="user-info text-start bg-light rounded-3 p-3">
+              <div class="info-item d-flex align-items-center mb-3">
+                <div class="icon-wrapper bg-primary bg-opacity-10 rounded-circle p-2 me-3">
+                  <i class="bi bi-envelope-fill text-primary"></i>
+                </div>
+                <div>
+                  <small class="text-muted d-block">Email</small>
+                  <%= @user.email %>
+                </div>
+              </div>
+              <div class="info-item d-flex align-items-center mb-3">
+                <div class="icon-wrapper bg-primary bg-opacity-10 rounded-circle p-2 me-3">
+                  <i class="bi bi-telephone-fill text-primary"></i>
+                </div>
+                <div>
+                  <small class="text-muted d-block">Phone</small>
+                  <%= @user.phone.presence || 'Not provided' %>
+                </div>
+              </div>
+              <div class="info-item d-flex align-items-center">
+                <div class="icon-wrapper bg-primary bg-opacity-10 rounded-circle p-2 me-3">
+                  <i class="bi bi-calendar-fill text-primary"></i>
+                </div>
+                <div>
+                  <small class="text-muted d-block">Member since</small>
+                  <%= @user.created_at.strftime("%B %Y") %>
+                </div>
+              </div>
+            </div>
+            
+            <% if current_user == @user %>
+              <div class="mt-4">
+                <%= link_to edit_user_registration_path, class: "btn btn-outline-primary w-100 rounded-pill" do %>
+                  <i class="bi bi-pencil-square me-2"></i>Edit Profile
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content Area -->
+      <div class="col-lg-8">
+        <div class="card border-0 shadow-lg rounded-4">
+          <div class="card-header bg-white border-0 py-4">
+            <div class="d-flex justify-content-between align-items-center">
+              <h4 class="mb-0 fw-bold">
+                <% if current_user == @user %>
+                  My Properties
+                <% else %>
+                  <%= @user.fullname %>'s Properties
+                <% end %>
+              </h4>
+              <% if current_user == @user %>
+                <%= link_to new_apartment_path, class: "btn btn-primary rounded-pill" do %>
+                  <i class="bi bi-plus-lg me-2"></i>Add Property
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+          <div class="card-body p-4">
+            <% if @apartments.any? %>
+              <div class="row g-4">
+                <% @apartments.each do |apartment| %>
+                  <div class="col-md-6">
+                    <%= render "apartments/apartment", apartment: apartment %>
+                  </div>
+                <% end %>
+              </div>
+            <% else %>
+              <div class="text-center py-5">
+                <div class="empty-state mb-4">
+                  <i class="bi bi-house-x display-1 text-muted"></i>
+                </div>
+                <h5 class="text-muted mb-3">No properties listed yet</h5>
+                <% if current_user == @user %>
+                  <p class="text-muted mb-4">Start adding your properties to showcase them to potential buyers or renters.</p>
+                  <%= link_to new_apartment_path, class: "btn btn-primary rounded-pill" do %>
+                    <i class="bi bi-plus-lg me-2"></i>Add Your First Property
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :styles do %>
+  <style>
+    .profile-page {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      min-height: calc(100vh - 72px);
+    }
+    
+    .profile-card {
+      transition: transform 0.3s ease;
+    }
+    
+    .profile-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .avatar-placeholder {
+      width: 150px;
+      height: 150px;
+      background: #f8f9fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+    }
+    
+    .icon-wrapper {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .empty-state {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+  </style>
+<% end %>

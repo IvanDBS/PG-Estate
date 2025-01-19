@@ -1,0 +1,131 @@
+<div id="<%= dom_id apartment %>" class="apartment-card fade-in">
+  <article class="card h-100 shadow-sm hover-shadow-md" role="article" aria-labelledby="apartment-<%= apartment.id %>-title">
+    <div class="card-img-top position-relative">
+      <% if apartment.pictures.any? %>
+        <%= link_to apartment, class: "img-hover-zoom", aria: { label: "View details of property in #{apartment.location}" } do %>
+          <%= image_tag apartment.pictures.first.url,
+              class: "card-img-top",
+              alt: "Property in #{apartment.location}",
+              loading: "lazy",
+              style: "height: 300px; object-fit: cover;" %>
+          <div class="card-img-overlay d-flex flex-column justify-content-end">
+            <span class="price-badge bg-primary text-white px-3 py-2 rounded-pill">
+              <%= number_to_currency(apartment.price) %>
+            </span>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="placeholder-img" style="height: 300px; background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);">
+          <div class="d-flex align-items-center justify-content-center h-100">
+            <i class="bi bi-image text-muted display-1"></i>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="card-body d-flex flex-column p-4">
+      <h3 id="apartment-<%= apartment.id %>-title" class="h5 card-title mb-3">
+        <%= apartment.apt_type.present? ? "#{apartment.apt_type.titleize} in #{apartment.location}" : "Property in #{apartment.location}" %>
+      </h3>
+
+      <ul class="list-unstyled mb-3 flex-grow-1" aria-label="Property details">
+        <li class="d-flex align-items-center mb-2">
+          <div class="icon-wrapper bg-primary bg-opacity-10 rounded-circle p-2 me-3">
+            <i class="bi bi-building text-primary"></i>
+          </div>
+          <span><%= pluralize(apartment.bedroom.presence || 'N/A', 'bedroom') %></span>
+        </li>
+        <li class="d-flex align-items-center mb-2">
+          <div class="icon-wrapper bg-primary bg-opacity-10 rounded-circle p-2 me-3">
+            <i class="bi bi-tools text-primary"></i>
+          </div>
+          <span>Condition: <strong><%= apartment.condition.present? ? apartment.condition.humanize : 'Not specified' %></strong></span>
+        </li>
+        <li class="d-flex align-items-center mb-2">
+          <div class="icon-wrapper bg-primary bg-opacity-10 rounded-circle p-2 me-3">
+            <i class="bi bi-geo-alt text-primary"></i>
+          </div>
+          <span><%= apartment.location.presence || 'Location not specified' %></span>
+        </li>
+        <li class="d-flex align-items-center">
+          <div class="icon-wrapper bg-primary bg-opacity-10 rounded-circle p-2 me-3">
+            <i class="bi bi-telephone text-primary"></i>
+          </div>
+          <span><%= apartment.user.phone.presence || 'Phone not available' %></span>
+        </li>
+      </ul>
+
+      <%= link_to apartment, 
+          class: "btn btn-primary w-100 rounded-pill",
+          role: "button",
+          aria: { label: "View full details of property in #{apartment.location}" } do %>
+        View Details <i class="bi bi-arrow-right ms-2"></i>
+      <% end %>
+    </div>
+
+    <%# Structured Data for SEO %>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Apartment",
+      "name": "<%= apartment.apt_type.present? ? "#{apartment.apt_type.titleize} in #{apartment.location}" : "Property in #{apartment.location}" %>",
+      "description": "<%= "Property with #{pluralize(apartment.bedroom.presence || 'N/A', 'bedroom')} in #{apartment.location}" %>",
+      "numberOfRooms": "<%= apartment.bedroom.presence || 'N/A' %>",
+      "price": "<%= apartment.price %>",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "<%= apartment.location.presence || 'Location not specified' %>"
+      }
+    }
+    </script>
+  </article>
+</div>
+
+<% content_for :styles do %>
+  <style>
+    .apartment-card {
+      transition: all 0.3s ease;
+    }
+    
+    .apartment-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .img-hover-zoom {
+      overflow: hidden;
+      display: block;
+    }
+    
+    .img-hover-zoom img {
+      transition: transform 0.5s ease;
+    }
+    
+    .img-hover-zoom:hover img {
+      transform: scale(1.1);
+    }
+    
+    .price-badge {
+      backdrop-filter: blur(4px);
+      background: rgba(var(--bs-primary-rgb), 0.9) !important;
+    }
+    
+    .icon-wrapper {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .placeholder-img {
+      background-size: 200% 200%;
+      animation: gradient 3s ease infinite;
+    }
+    
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+  </style>
+<% end %>
