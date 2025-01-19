@@ -1,0 +1,1 @@
+# Ignore all files in these directories\n/tmp/*\n!/tmp/.keep\n!/tmp/pids/\n/tmp/pids/*\n!/tmp/pids/.keep\n!/tmp/storage/\n/tmp/storage/*\n!/tmp/storage/.keep\n/log/*\n!/log/.keep\n/storage/*\n!/storage/.keep\n/public/uploads/*
